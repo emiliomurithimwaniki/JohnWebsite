@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    John Plumber Plumbing Services - Single Page Website
+    Edit tips:
+    - Replace text and images directly in this file.
+    - Gallery images: search for plumbing-related images on Unsplash and swap the img src values.
+    - Testimonials: duplicate a .testimonial card block to add more.
+    - Forms: Replace Formspree action with your own endpoint or email service.
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- SEO -->
+  <title>John Plumber Plumbing Services | Reliable Emergency Plumbing, Repairs & Installations</title>
+  <meta name="description" content="Reliable plumbing services by John Plumber. Fast, affordable, professional repairs, installations, and 24/7 emergency plumbing. Call/WhatsApp 0707047674." />
+  <meta name="keywords" content="plumbing services, reliable plumber, emergency plumbing, drain cleaning, leak detection, pipe repairs, fixture installation, Nairobi plumber" />
+  <link rel="canonical" href="https://example.com/" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="John Plumber Plumbing Services" />
+  <meta property="og:description" content="Fast, affordable and professional plumbing. 24/7 emergency support. Call/WhatsApp 0707047674." />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1581092944531-6a3eb125c0a4?w=1200&q=60&auto=format&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon (optional) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text y='50%' x='50%' text-anchor='middle' dominant-baseline='middle' font-size='40'>🚰</text></svg>">
+
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="header" id="home">
+    <div class="container header__inner">
+      <div class="brand">
+        <a href="#home" class="logo">John Plumber <span>Plumbing Services</span></a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primaryNav">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <nav class="nav" id="primaryNav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a href="#home" class="nav__link"><span class="ni" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11l9-7 9 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span> Home</a></li>
+          <li><a href="#services" class="nav__link"><span class="ni" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span> Services</a></li>
+          <li><a href="#gallery" class="nav__link"><span class="ni" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 17l6-6 4 4 3-3 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span> Gallery</a></li>
+          <li><a href="#testimonials" class="nav__link"><span class="ni" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span> Testimonials</a></li>
+          <li><a href="#quote" class="nav__link"><span class="ni" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 15v4a2 2 0 0 1-2 2H5l-3 3V5a2 2 0 0 1 2-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 3l-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span> Get Quote</a></li>
+          <li><a href="#booking" class="nav__link"><span class="ni" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span> Book Service</a></li>
+          <li><a href="#contact" class="nav__link"><span class="ni" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.9v2.6a2 2 0 0 1-2.2 2 19.5 19.5 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.6 19.6 0 0 1 2.5 4.1 2 2 0 0 1 4.5 2h2.6c.5 0 1 .3 1.2.8l1.2 2.8c.2.5.1 1-.2 1.4l-1 1.1a.9.9 0 0 0-.2.9 12.7 12.7 0 0 0 5 5 .9.9 0 0 0 .9-.1l1.1-1a1.3 1.3 0 0 1 1.4-.2l2.8 1.2c.5.2.8.7.8 1.2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span> Contact</a></li>
+        </ul>
+      </nav>
+
+      <a href="#booking" class="btn btn--primary header__cta hide-sm">Book Now</a>
+      <a href="tel:0707047674" class="btn btn--secondary header__cta show-sm" aria-label="Call John Now">Call Now</a>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+        <span class="theme-toggle__icon" aria-hidden="true">
+          <!-- Sun/Moon icon -->
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5 5l-1.4-1.4M20.4 20.4 19 19M19 5l1.4-1.4M4.6 20.4 6 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero / Home Section -->
+  <section class="hero" aria-label="Hero">
+    <div class="container hero__inner">
+      <div class="hero__content reveal">
+        <h1 class="hide-sm">Reliable Plumbing Services by John Plumber – <span class="highlight">Fast, Affordable, and Professional.</span></h1>
+        <h1 class="show-sm">Reliable Plumbing – <span class="highlight">Fast & Affordable</span></h1>
+        <p class="intro hide-sm">With years of experience, I handle all your plumbing needs from repairs to installations. Available 24/7 for emergencies.</p>
+        <p class="intro show-sm">Repairs, installations, emergencies. Available 24/7.</p>
+        <ul class="contact-lines">
+          <li>
+            <span class="ci" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M3 7l9 7 9-7" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </span>
+            <strong>Email:</strong> <a href="mailto:johnkiamati@gmail.com">johnkiamati@gmail.com</a>
+          </li>
+          <li>
+            <span class="ci" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 16.9v2.6a2 2 0 0 1-2.2 2 19.5 19.5 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.6 19.6 0 0 1 2.5 4.1 2 2 0 0 1 4.5 2h2.6c.5 0 1 .3 1.2.8l1.2 2.8c.2.5.1 1-.2 1.4l-1 1.1a.9.9 0 0 0-.2.9 12.7 12.7 0 0 0 5 5 .9.9 0 0 0 .9-.1l1.1-1a1.3 1.3 0 0 1 1.4-.2l2.8 1.2c.5.2.8.7.8 1.2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </span>
+            <strong>Phone:</strong> <a href="tel:0707047674">0707047674</a> (Call or WhatsApp)
+          </li>
+        </ul>
+        <div class="hero__cta-group hide-sm">
+          <a href="#quote" class="btn btn--secondary">Get a Free Quote</a>
+          <a href="https://wa.me/254707047674" class="btn btn--whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">WhatsApp Chat</a>
+        </div>
+        <div class="hero__cta-group show-sm">
+          <a href="tel:0707047674" class="btn btn--primary" aria-label="Call Now">Call Now</a>
+          <a href="https://wa.me/254707047674" class="btn btn--whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__media reveal reveal--scale" data-delay="1">
+        <video class="parallax" src="video 1.mp4" autoplay loop muted playsinline style="width:100%; height:auto; border-radius:18px;"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Decorative divider -->
+  <div class="section-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,64 C240,96 480,0 720,32 C960,64 1200,96 1440,32 L1440,90 L0,90 Z" fill="#ffffff" fill-opacity="1"></path>
+    </svg>
+  </div>
+
+  <!-- Services Section -->
+  <section class="section" id="services" aria-label="Services">
+    <div class="container">
+      <header class="section__header reveal">
+        <h2>Our Services</h2>
+        <p>Trusted plumbing services for homes and businesses.</p>
+      </header>
+
+      <div class="cards">
+        <!-- Service Card -->
+        <article class="card reveal" data-delay="1">
+          <h3>Pipe Repairs</h3>
+          <p>Fixing burst or leaking pipes quickly to prevent water damage.</p>
+          <a href="#quote" class="card__action">Get Quote</a>
+        </article>
+        <article class="card reveal" data-delay="2">
+          <h3>Drain Cleaning</h3>
+          <p>Unclogging and cleaning drains to keep your plumbing flowing.</p>
+          <a href="#quote" class="card__action">Get Quote</a>
+        </article>
+        <article class="card reveal" data-delay="3">
+          <h3>Fixture Installations</h3>
+          <p>Professional installation of faucets, toilets, sinks and more.</p>
+          <a href="#quote" class="card__action">Get Quote</a>
+        </article>
+        <article class="card reveal" data-delay="4">
+          <h3>Leak Detection</h3>
+          <p>Accurate detection and repair of hidden leaks to save costs.</p>
+          <a href="#quote" class="card__action">Get Quote</a>
+        </article>
+        <article class="card reveal" data-delay="5">
+          <h3>Emergency Services</h3>
+          <p>24/7 emergency response for urgent plumbing issues.</p>
+          <a href="#quote" class="card__action">Get Quote</a>
+        </article>
+        <article class="card reveal" data-delay="6">
+          <h3>Irrigation Services</h3>
+          <p>Watering plants and lawns, fixing broken irrigation systems, installing new irrigation systems.</p>
+          <a href="#quote" class="card__action">Get Quote</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section section--alt" id="gallery" aria-label="Project Gallery">
+    <div class="container">
+      <header class="section__header reveal">
+        <h2>Project Gallery</h2>
+        <p>Before-and-after snapshots of recent jobs.</p>
+      </header>
+
+      <!--
+        Edit gallery:
+        - Replace img src URLs below with your own photos or Unsplash links.
+        - Add a title in data-caption for each image.
+        - Duplicate a .gallery__item block to add more images.
+      -->
+      <div class="gallery" id="galleryGrid">
+        <figure class="gallery__item reveal" data-delay="1">
+          <img src="image 6.jpg " alt="PVC pipe installation " loading="lazy" width="400" height="300" data-caption="Pipe repair">
+          <figcaption>PVC pipe installation</figcaption>
+        </figure>
+        <figure class="gallery__item reveal" data-delay="2">
+          <img src="image 2.jpg" alt="Installing In House electric water pumps" loading="lazy" width="400" height="300" data-caption="Drain cleaning">
+          <figcaption>Installing In House electric water pumps</figcaption>
+        </figure>
+        <figure class="gallery__item reveal" data-delay="3">
+          <img src="image 9.jpg" alt="Biodigester" loading="lazy" width="400" height="300" data-caption="Fixture installation">
+          <figcaption>Biodigester</figcaption>
+        </figure>
+        <figure class="gallery__item gallery__item--stack reveal" data-delay="4">
+          <img src="image 3.jpg" alt="Creating a septic waste underground tank" loading="lazy" width="400" height="300" data-caption="Leak detection">
+          <img src="image 5.jpg" alt="Creating a septic waste underground tank" loading="lazy" width="400" height="300" data-caption="Leak detection">
+          <img src="image 7.jpg" alt="Creating a septic waste underground tank" loading="lazy" width="400" height="300" data-caption="Leak detection">
+          <img src="image 8.jpg" alt="Creating a septic waste underground tank" loading="lazy" width="400" height="300" data-caption="Leak detection">
+          <figcaption>Creating a septic waste underground Tank</figcaption>
+        </figure>
+        <figure class="gallery__item reveal" data-delay="5">
+          <img src="image 10.jpg" alt="Mordern Washroom" loading="lazy" width="400" height="300" data-caption="Emergency response">
+          <figcaption>Mordern Washroom</figcaption>
+        </figure>
+        <figure class="gallery__item gallery__item--stack reveal" data-delay="6">
+          <img src="image 1.jpg" alt="Solar water heater installation" loading="lazy" width="400" height="300" data-caption="Copper pipe soldering">
+          <img src="image 21.jpg" alt="Solar water heater installation" loading="lazy" width="400" height="300" data-caption="Copper pipe soldering">
+          <img src="image 31.jpg" alt="Solar water heater installation" loading="lazy" width="400" height="300" data-caption="Copper pipe soldering">
+         <figcaption>Solar water heater installation</figcaption>
+        </figure>
+        <figure class="gallery__item gallery__item--stack reveal" data-delay="7">
+          <img src="Bathroom 1.jpg" alt="Bathroom Accesories installatiom" loading="lazy" width="400" height="300" data-caption="Leak detection">
+          <img src="Bathroom 2.jpg" alt="Bathroom Accesories installatiom" loading="lazy" width="400" height="300" data-caption="Leak detection">
+          <img src="Bathroom 4.jpg" alt="Bathroom Accesories installatiom" loading="lazy" width="400" height="300" data-caption="Leak detection">
+          <img src="Bathroom 5.jpg" alt="Bathroom Accesories installatiom" loading="lazy" width="400" height="300" data-caption="Leak detection">
+          <figcaption>Bathroom Accesories installatiom</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+      <button class="lightbox__close" id="lightboxClose" aria-label="Close">×</button>
+      <img id="lightboxImg" alt="Expanded gallery item" />
+      <p class="lightbox__caption" id="lightboxCaption"></p>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="section" id="testimonials" aria-label="Testimonials">
+    <div class="container">
+      <header class="section__header">
+        <h2>What Clients Say</h2>
+        <p>Real feedback from satisfied customers.</p>
+      </header>
+
+      <!--
+        Add testimonials:
+        - Duplicate a .testimonial block to add more.
+        - Edit the quote text, name, and optional location.
+      -->
+      <div class="testimonials">
+        <article class="testimonial">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>
+            “John's team was incredibly professional and efficient. They diagnosed our persistent leak, which two other plumbers couldn't find, and fixed it within hours. The pricing was transparent and fair. I couldn't be happier with the service.”
+            <cite>— Jane D., Westlands</cite>
+          </blockquote>
+        </article>
+        <article class="testimonial">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>
+            “I called John for an emergency burst pipe in the middle of the night. He answered immediately and arrived faster than I expected. He was calm, professional, and got the situation under control, preventing major water damage. Truly a lifesaver!”
+            <cite>— Mark O., Kilimani</cite>
+          </blockquote>
+        </article>
+        <article class="testimonial">
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>
+            “We hired John Plumber for a full bathroom renovation, including new piping and fixture installations. The quality of their work is outstanding. Everything was completed on schedule and to a very high standard. I highly recommend them for any major plumbing projects.”
+            <cite>— Emily & Tom R., Lavington</cite>
+          </blockquote>
+        </article>
+      </div>
+      </div>
+    </div>
+  </section>
+    
+
+  <!-- Review Submission Section -->
+  <section class="section section--tinted" id="submit-review" aria-label="Submit a Review">
+    <div class="container">
+      <header class="section__header">
+        <h2>Share Your Experience</h2>
+        <p>We'd love to hear your feedback. Fill out the form below to add your review.</p>
+      </header>
+      <form id="review-form" class="form">
+        <div class="form__group">
+          <label for="reviewer-name">Your Name</label>
+          <input type="text" id="reviewer-name" name="name" required>
+        </div>
+        <div class="form__group">
+          <label for="reviewer-location">Your Location (e.g., City)</label>
+          <input type="text" id="reviewer-location" name="location">
+        </div>
+        <div class="form__group">
+          <label for="review-rating">Rating</label>
+          <select id="review-rating" name="rating" required>
+            <option value="5">★★★★★ (Excellent)</option>
+            <option value="4">★★★★☆ (Great)</option>
+            <option value="3">★★★☆☆ (Good)</option>
+            <option value="2">★★☆☆☆ (Fair)</option>
+            <option value="1">★☆☆☆☆ (Poor)</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label for="review-text">Your Review</label>
+          <textarea id="review-text" name="review" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary">Submit Review</button>
+        <p id="review-form-status" class="form__status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Get Quote Form -->
+  <section class="section section--alt" id="quote" aria-label="Get Quote">
+    <div class="container">
+      <header class="section__header">
+        <h2>Get a Free Quote</h2>
+        <p>Tell us about your issue and we’ll respond quickly.</p>
+      </header>
+
+      <!-- FormSubmit (AJAX) sends directly to your email -->
+      <form class="form" id="quoteForm" action="https://formsubmit.co/ajax/johnkiamati@gmail.com" method="POST" novalidate>
+        <div class="grid">
+          <label>
+            <span>Name*</span>
+            <input type="text" name="name" required placeholder="Your full name" />
+          </label>
+          <label>
+            <span>Email*</span>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </label>
+          <label>
+            <span>Phone*</span>
+            <input type="tel" name="phone" required placeholder="07XXXXXXXX" />
+          </label>
+          <label>
+            <span>Service Type*</span>
+            <select name="service" required>
+              <option value="">Select a service</option>
+              <option>Repair</option>
+              <option>Installation</option>
+              <option>Drain Cleaning</option>
+              <option>Leak Detection</option>
+              <option>Irrigation Services</option>
+              <option>Emergency Services</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="full">
+            <span>Description of Issue*</span>
+            <textarea name="message" rows="4" required placeholder="Describe the problem"></textarea>
+          </label>
+          <label>
+            <span>Preferred Date</span>
+            <input type="date" name="preferred_date" />
+          </label>
+          <input type="hidden" name="_subject" value="New Quote Request - John Plumber" />
+          <input type="hidden" name="_captcha" value="true" />
+          <input type="hidden" name="_template" value="table" />
+          <!-- Honeypot for spam -->
+          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        </div>
+        <div class="captcha-placeholder" aria-label="reCAPTCHA placeholder">
+          <small>reCAPTCHA placeholder</small>
+        </div>
+        <button type="submit" class="btn btn--primary">Send Request</button>
+        <p class="form__msg" id="quoteMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Book Service Form -->
+  <section class="section" id="booking" aria-label="Book Service">
+    <div class="container">
+      <header class="section__header">
+        <h2>Book a Service</h2>
+        <p>Choose a date and time that works for you.</p>
+      </header>
+
+      <!-- FormSubmit (AJAX) sends directly to your email -->
+      <form class="form" id="bookingForm" action="https://formsubmit.co/ajax/johnkiamati@gmail.com" method="POST" novalidate>
+        <div class="grid">
+          <label>
+            <span>Name*</span>
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            <span>Email*</span>
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            <span>Phone*</span>
+            <input type="tel" name="phone" required />
+          </label>
+          <label class="full">
+            <span>Address*</span>
+            <input type="text" name="address" required placeholder="Street, City" />
+          </label>
+          <label>
+            <span>Urgency*</span>
+            <select name="urgency" required>
+              <option value="">Select urgency</option>
+              <option>Normal</option>
+              <option>Emergency</option>
+            </select>
+          </label>
+          <label>
+            <span>Service Type*</span>
+            <select name="service" required>
+              <option value="">Select a service</option>
+              <option>Repair</option>
+              <option>Installation</option>
+              <option>Drain Cleaning</option>
+              <option>Leak Detection</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>
+            <span>Preferred Date*</span>
+            <input type="date" name="date" required />
+          </label>
+          <label>
+            <span>Time Slot*</span>
+            <select name="time" required>
+              <option value="">Select a time</option>
+              <option>08:00 - 10:00</option>
+              <option>10:00 - 12:00</option>
+              <option>12:00 - 14:00</option>
+              <option>14:00 - 16:00</option>
+              <option>16:00 - 18:00</option>
+            </select>
+          </label>
+          <label class="full">
+            <span>Notes</span>
+            <textarea name="notes" rows="3" placeholder="Any additional details"></textarea>
+          </label>
+          <input type="hidden" name="_subject" value="New Booking Request - John Plumber" />
+          <input type="hidden" name="_captcha" value="true" />
+          <!-- Honeypot for spam -->
+          <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        </div>
+        <div class="captcha-placeholder" aria-label="reCAPTCHA placeholder">
+          <small>reCAPTCHA placeholder</small>
+        </div>
+        <button type="submit" class="btn btn--primary">Confirm Booking</button>
+        <p class="form__msg" id="bookingMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+
+
+  <!-- Contact Section -->
+  <section class="section section--alt" id="contact" aria-label="Contact">
+    <div class="container contact">
+      <div class="contact__info">
+        <h2>Contact</h2>
+        <p>Based in <strong>  Kenya</strong>. Reach out anytime for reliable plumbing support.</p>
+        <ul class="contact-lines">
+          <li>
+            <span class="ci" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M3 7l9 7 9-7" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </span>
+            <strong>Email:</strong> <a href="mailto:johnkiamati@gmail.com">johnkiamati@gmail.com</a>
+          </li>
+          <li>
+            <span class="ci" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 16.9v2.6a2 2 0 0 1-2.2 2 19.5 19.5 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.6 19.6 0 0 1 2.5 4.1 2 2 0 0 1 4.5 2h2.6c.5 0 1 .3 1.2.8l1.2 2.8c.2.5.1 1-.2 1.4l-1 1.1a.9.9 0 0 0-.2.9 12.7 12.7 0 0 0 5 5 .9.9 0 0 0 .9-.1l1.1-1a1.3 1.3 0 0 1 1.4-.2l2.8 1.2c.5.2.8.7.8 1.2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </span>
+            <strong>Phone:</strong> <a href="tel:0707047674">0707047674</a> (Call or WhatsApp)
+          </li>
+          <li>
+            <span class="ci" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 3.9A10 10 0 1 0 3.4 20.5L2 22l1.7-.5A10 10 0 0 0 12 22a10 10 0 0 0 8-18.1zM12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm4.6-5.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8.9-1 .9-.2 0-.5 0-1-.2s-1-.6-1.4-1c-.5-.5-.9-1-1-1.2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.1-.2.2-.4.1-.2 0-.3 0-.5 0-.1-.7-1.8-1-2.4-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.5.1-.8.3-.3.3-1 1-1 2.4s1 2.7 1.1 2.8c.1.2 2 3.1 4.9 4.2.7.3 1.2.4 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.1-1.4-.1-.1-.3-.2-.6-.3z" fill="currentColor"/>
+              </svg>
+            </span>
+            <strong>WhatsApp:</strong> <a href="https://wa.me/254707047674" target="_blank" rel="noopener">Chat now</a>
+          </li>
+        </ul>
+      </div>
+      <div class="contact__map" aria-label="Map">
+        <!-- Google Maps placeholder (replace with your location if desired) -->
+        <iframe title="Our Location Map - Kenya" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Kenya&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo">JP</span>
+        <p>© <span id="year"></span> John Plumber Plumbing Services. All rights reserved.</p>
+      </div>
+      <ul class="footer__links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#quote">Get Quote</a></li>
+        <li><a href="#booking">Book Service</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#" aria-disabled="true">Privacy Policy</a></li>
+      </ul>
+      <div class="footer__social" aria-label="Social media">
+        <a href="https://wa.me/254707047674" aria-label="WhatsApp" class="social__icon" title="WhatsApp" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 3.9A10 10 0 1 0 3.4 20.5L2 22l1.7-.5A10 10 0 0 0 12 22a10 10 0 0 0 8-18.1zM12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm4.6-5.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8.9-1 .9-.2 0-.5 0-1-.2s-1-.6-1.4-1c-.5-.5-.9-1-1-1.2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.1-.2.2-.4.1-.2 0-.3 0-.5 0-.1-.7-1.8-1-2.4-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.5.1-.8.3-.3.3-1 1-1 2.4s1 2.7 1.1 2.8c.1.2 2 3.1 4.9 4.2.7.3 1.2.4 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.1-1.4-.1-.1-.3-.2-.6-.3z" fill="#25D366"/></svg>
+        </a>
+      </div>
+
+      <!-- Designer credit -->
+      <div class="footer__credit" style="width:100%; margin-top:8px; color:#bfdbfe; font-size:14px">
+        Website Designed By <strong>Emilio Tech</strong>. Get yours now
+        <a href="https://wa.me/254796031071?text=Hi%20Emilio%20Tech%2C%20I%E2%80%99m%20interested%20in%20a%20professional%20website%20like%20John%20Plumber.%20Please%20contact%20me." target="_blank" rel="noopener" style="color:#93c5fd; font-weight:700; text-decoration:underline">here</a>.
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- Floating WhatsApp action button -->
+  <a href="https://wa.me/254707047674" class="fab fab--whatsapp" aria-label="Chat on WhatsApp" target="_blank" rel="noopener">
+    <!-- WhatsApp icon -->
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 3.9A10 10 0 1 0 3.4 20.5L2 22l1.7-.5A10 10 0 0 0 12 22a10 10 0 0 0 8-18.1zM12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm4.6-5.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2-.2.3-.8.9-1 .9-.2 0-.5 0-1-.2s-1-.6-1.4-1c-.5-.5-.9-1-1-1.2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.1-.2.2-.4.1-.2 0-.3 0-.5 0-.1-.7-1.8-1-2.4-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.5.1-.8.3-.3.3-1 1-1 2.4s1 2.7 1.1 2.8c.1.2 2 3.1 4.9 4.2.7.3 1.2.4 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.1-1.4-.1-.1-.3-.2-.6-.3z" fill="#fff"/></svg>
+  </a>
+
+  <!-- Sticky mobile CTA bar (phones only) -->
+  <div class="mobile-cta-bar show-xs" role="navigation" aria-label="Quick actions">
+    <a href="tel:0707047674" class="mobile-cta__btn">Call</a>
+    <a href="https://wa.me/254707047674" target="_blank" rel="noopener" class="mobile-cta__btn">WhatsApp</a>
+    <a href="#quote" class="mobile-cta__btn">Quote</a>
+  </div>
+
+  <script src="script.js"></script>
+
+<script>
+// Dynamic Testimonials and Review Form Submission
+(() => {
+  const testimonialsContainer = document.querySelector('.testimonials');
+  const reviewForm = document.getElementById('review-form');
+  const formStatus = document.getElementById('review-form-status');
+  const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbzyzTCnyevG1O5sJ8gKTHvecLbJRGXgGK4xOOhCKP5K7w4AINW5JgsdyNlDbZPS-9kI/exec';
+
+  const starRating = (rating) => {
+    const num = parseInt(rating, 10);
+    return '★★★★★'.slice(5 - num) + '☆☆☆☆☆'.slice(num);
+  };
+
+  const loadTestimonials = async () => {
+    if (!testimonialsContainer) return;
+
+    // Clear existing hardcoded testimonials and show a loading message
+    testimonialsContainer.innerHTML = '<p>Loading reviews...</p>';
+
+    try {
+      const response = await fetch(appsScriptUrl, { cache: 'no-store' });
+      const text = await response.text();
+      let result = null;
+      try { result = JSON.parse(text); } catch (_) {
+        console.warn('Reviews GET returned non-JSON:', text);
+      }
+      console.log('Reviews GET response:', { status: response.status, ok: response.ok, result });
+      if (!response.ok || !result || result.ok === false) {
+        throw new Error(result?.error || 'Failed to fetch reviews.');
+      }
+
+      const reviews = Array.isArray(result.data) ? result.data : [];
+      testimonialsContainer.innerHTML = ''; // Clear loading message
+
+      if (!reviews.length) {
+        testimonialsContainer.innerHTML = '<p>Be the first to leave a review!</p>';
+        return;
+      }
+
+      // The script already returns them newest first, so no client-side sort is needed.
+      reviews.forEach(reviewData => {
+        const article = document.createElement('article');
+        article.className = 'testimonial';
+        article.innerHTML = `
+          <div class="stars" aria-label="${reviewData.rating} out of 5 stars">${starRating(reviewData.rating)}</div>
+          <blockquote>
+            “${reviewData.review}”
+            <cite>— ${reviewData.name}${reviewData.location ? `, ${reviewData.location}` : ''}</cite>
+          </blockquote>
+        `;
+        testimonialsContainer.appendChild(article);
+      });
+    } catch (error) {
+      testimonialsContainer.innerHTML = '<p>Could not load reviews at this time.</p>';
+      console.error('Error loading testimonials:', error);
+    }
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    if (!reviewForm || !formStatus) return;
+
+    const formData = new FormData(reviewForm);
+    const reviewData = {
+      name: formData.get('name'),
+      location: formData.get('location'),
+      rating: formData.get('rating'),
+      review: formData.get('review'),
+    };
+
+    formStatus.textContent = 'Submitting...';
+    formStatus.style.color = 'inherit';
+
+    try {
+      // Use URL-encoded submission to avoid CORS preflight
+      const response = await fetch(appsScriptUrl, {
+        method: 'POST',
+        body: new URLSearchParams(reviewData),
+      });
+
+      let result = null;
+      try { result = await response.json(); } catch (_) {}
+      if (!response.ok || (result && result.ok === false)) {
+        console.error('Review submit failed:', { status: response.status, statusText: response.statusText, result });
+        throw new Error(result?.error || 'Submission failed.');
+      }
+
+      formStatus.textContent = 'Thank you! Your review has been submitted.';
+      formStatus.style.color = 'var(--success)';
+      reviewForm.reset();
+      loadTestimonials(); // Refresh the testimonials list
+    } catch (error) {
+      formStatus.textContent = 'An error occurred. Please try again.';
+      formStatus.style.color = 'var(--error)';
+      console.error('Error submitting review:', error);
+    }
+  };
+
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', handleFormSubmit);
+  }
+
+  // Load testimonials when the page is ready
+  document.addEventListener('DOMContentLoaded', loadTestimonials);
+})();
+</script>
+</body>
+</html>

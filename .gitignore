@@ -1,0 +1,23 @@
+# General
+.DS_Store
+Thumbs.db
+
+# Node / tooling (not used now, but safe)
+node_modules/
+.npm/
+.pnpm-store/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build caches
+.cache/
+dist/
+build/
+
+# Editors/OS
+.vscode/
+.idea/
+*.swp
