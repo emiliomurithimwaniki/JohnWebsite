@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | John Plumber</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#">Admin</a>
+      <nav class="nav">
+        <button id="logoutBtn" class="btn btn-outline small">Logout</button>
+      </nav>
+    </div>
+  <!-- Order Details Modal -->
+  <div id="orderModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <div class="modal-overlay" data-close="order-modal"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="orderModalTitle">Order Details</h3>
+        <button class="btn small" id="closeOrderModalBtn" aria-label="Close">Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row"><label>Name</label><div id="omName"></div></div>
+        <div class="form-row"><label>Contact</label><div id="omContact"></div></div>
+        <div class="form-row"><label>Service</label><div id="omService"></div></div>
+        <div class="form-row"><label>Date</label><div id="omDate"></div></div>
+        <div class="form-row"><label>Description</label><div id="omDesc"></div></div>
+        <div class="form-row"><label>Current Status</label><div id="omStatus"></div></div>
+        <div class="toolbar">
+          <button class="btn" id="omSetUnattended">Mark Unattended</button>
+          <button class="btn btn-outline" id="omSetPending">Mark Pending</button>
+          <button class="btn btn-primary" id="omSetComplete">Mark Complete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Admin Dashboard</h1>
+      <p class="muted" style="margin-top:-6px">Manage gallery uploads, client orders, and reviews.</p>
+
+      <div class="admin-nav" role="navigation" aria-label="Admin sections">
+        <a class="pill" href="#upload">Upload</a>
+        <a class="pill" href="#orders">Orders</a>
+        <a class="pill" href="#reviews">Reviews</a>
+        <span class="flex-spacer"></span>
+        <a class="pill ghost" href="gallery.html" target="_blank" rel="noopener">Open Gallery ↗</a>
+      </div>
+
+      <div class="admin-grid">
+      <section id="upload" class="card-block admin-card span-2">
+        <div class="admin-section-title">
+          <h2>Upload Gallery Item</h2>
+          <p class="inline-help">Quickly upload via Cloudinary or paste any public image URL.</p>
+        </div>
+        <form id="uploadForm" class="form" enctype="multipart/form-data">
+          <div class="form-row">
+            <label for="gTitle">Title</label>
+            <input id="gTitle" type="text" required />
+          </div>
+          <div class="form-row">
+            <label for="gDesc">Description</label>
+            <textarea id="gDesc" required></textarea>
+          </div>
+          <div class="form-row">
+            <label for="gCategory">Category</label>
+            <select id="gCategory" required>
+              <option value="">-- Select Category --</option>
+              <option value="leak-detection">Leak Detection & Repair</option>
+              <option value="pipe-installation">Pipe Installation</option>
+              <option value="bathroom-kitchen">Bathroom & Kitchen</option>
+              <option value="drain-cleaning">Drain Cleaning</option>
+              <option value="water-heaters">Water Heaters</option>
+              <option value="emergency-plumbing">Emergency Plumbing</option>
+              <option value="general-plumbing">General Plumbing</option>
+              <option value="drip-irrigation-systems">Drip Irrigation Systems</option>
+              <option value="solar-water-heaters">Solar Water Heaters</option>
+              <option value="solar-water-pumps">Solar Water Pumps</option>
+              <option value="laboratory-gas-fittings">Laboratory Gas Fittings</option>
+              <option value="dam-liners">Dam Liners</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="gTags">Additional Tags (comma-separated)</label>
+            <input id="gTags" type="text" placeholder="kitchen, copper, installation" />
+            <small>Optional. Helps users filter and find related work.</small>
+          </div>
+          <div class="form-row">
+            <label for="gUrl">Image URL</label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="gUrl" type="url" placeholder="https://res.cloudinary.com/.../image.jpg" style="flex:1" />
+              <button type="button" class="btn small" id="copyGUrlBtn" aria-label="Copy Image URL">Copy</button>
+            </div>
+            <small>Paste a direct image link or use Cloudinary Quick Upload below to auto-fill.</small>
+          </div>
+          <div class="form-row">
+            <label>Cloudinary Quick Upload (Optional)</label>
+            <button type="button" class="btn btn-outline" id="openCloudModalBtn">Get a LINK</button>
+            <small>Use the uploader modal to drag & drop or pick an image from your device.</small>
+          </div>
+          <div class="toolbar">
+            <button class="btn btn-primary" type="submit">Upload</button>
+            <a class="btn btn-light" href="#orders">Go to Orders</a>
+            <a class="btn btn-light" href="#reviews">Go to Reviews</a>
+          </div>
+          <p class="form-msg" id="uploadMsg"></p>
+        </form>
+      </section>
+
+      <section id="orders" class="card-block admin-card">
+        <div class="admin-section-title">
+          <h2>Orders</h2>
+          <p class="inline-help">View recent orders sent from the site.</p>
+        </div>
+        <div id="adminOrders" class="table"></div>
+      </section>
+
+      <section id="reviews" class="card-block admin-card">
+        <div class="admin-section-title">
+          <h2>Reviews</h2>
+          <p class="inline-help">Manage submitted reviews. Delete if inappropriate.</p>
+        </div>
+        <div id="adminReviews" class="table"></div>
+      </section>
+      
+      <section id="manageGallery" class="card-block admin-card span-2">
+        <div class="admin-section-title">
+          <h2>Manage Gallery</h2>
+          <p class="inline-help">Edit details or delete photos from Firestore.</p>
+        </div>
+        <div id="adminGallery" class="table"></div>
+      </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Cloudinary Uploader Modal -->
+  <div id="cloudModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cloudModalTitle">
+    <div class="modal-overlay" data-close="cloud-modal"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="cloudModalTitle">Cloudinary Quick Upload</h3>
+        <button class="btn small" id="closeCloudModalBtn" aria-label="Close">Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <input id="cloudName" type="text" placeholder="Cloud name (e.g. mycloud)" />
+          <input id="cloudPreset" type="text" placeholder="Unsigned upload preset" />
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
+          <button type="button" class="btn btn-outline" id="cloudUploadBtn">Upload image</button>
+        </div>
+        <div id="cloudDropzone" class="dropzone" style="margin-top:8px">Drag & drop image here to upload</div>
+        <small id="cloudUploadMsg"></small>
+        <small id="cloudProgress"></small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Gallery Item Modal -->
+  <div id="editGalleryModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="editGalleryTitle">
+    <div class="modal-overlay" data-close="edit-gallery"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="editGalleryTitle">Edit Gallery Item</h3>
+        <button class="btn small" id="closeEditGalleryModalBtn" aria-label="Close">Close</button>
+      </div>
+      <div class="modal-body">
+        <input id="egId" type="hidden" />
+        <div class="form-row"><label>Title</label><input id="egTitle" type="text" /></div>
+        <div class="form-row"><label>Description</label><textarea id="egDesc" rows="3"></textarea></div>
+        <div class="form-row"><label>Category</label><input id="egCategory" type="text" placeholder="e.g. kitchen" /></div>
+        <div class="form-row"><label>Tags (comma-separated)</label><input id="egTags" type="text" /></div>
+        <div class="form-row"><label>Image URL</label><input id="egUrl" type="url" /></div>
+        <div class="toolbar"><button class="btn btn-primary" id="saveGalleryEditBtn">Save Changes</button></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="assets/js/notify.js"></script>
+  <script src="assets/js/firebase.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

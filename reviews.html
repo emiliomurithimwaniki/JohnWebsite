@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Reviews | John Plumber</title>
+  <meta name="description" content="Read customer reviews and share your experience with John Plumber." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="theme-teal">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/"><img class="logo-mark" src="assets/images/logo.svg" alt="" aria-hidden="true"/> John Plumber</a>
+      <nav class="nav" id="nav">
+        <a href="/">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a class="active" href="reviews.html">Reviews</a>
+        <a href="quote.html">Get a Quote</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container grid-2 reveal">
+      <section>
+        <h1>Client Reviews</h1>
+        <div id="reviewsList" class="reviews-list reveal d1" aria-live="polite"></div>
+      </section>
+      <section>
+        <h2>Leave a Review</h2>
+        <form id="reviewForm" class="form">
+          <div class="form-row">
+            <label for="rName">Name</label>
+            <input id="rName" name="name" type="text" required minlength="2" />
+          </div>
+          <div class="form-row">
+            <label for="rRating">Rating</label>
+            <select id="rRating" name="rating" required>
+              <option value="">Select</option>
+              <option value="5">★★★★★</option>
+              <option value="4">★★★★☆</option>
+              <option value="3">★★★☆☆</option>
+              <option value="2">★★☆☆☆</option>
+              <option value="1">★☆☆☆☆</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="rComment">Comments</label>
+            <textarea id="rComment" name="comment" required minlength="5"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit Review</button>
+          <p class="form-msg" id="reviewMsg" role="status"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container copyright">© <span id="year"></span> John Plumber.</div>
+  </footer>
+
+  <a href="https://wa.me/254707047674" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <img src="assets/images/whatsapp.svg" alt="WhatsApp" />
+  </a>
+
+  <script src="assets/js/firebase.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/reviews.js"></script>
+</body>
+</html>

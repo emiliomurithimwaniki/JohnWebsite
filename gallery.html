@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Gallery | John Plumber</title>
+  <meta name="description" content="Browse our completed plumbing projects: installations, repairs, and renovations." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="theme-teal">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/"><img class="logo-mark" src="assets/images/logo.svg" alt="" aria-hidden="true"/> John Plumber</a>
+      <nav class="nav" id="nav">
+        <a href="/">Home</a>
+        <a class="active" href="gallery.html">Gallery</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="quote.html">Get a Quote</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container reveal">
+      <h1>Project Gallery</h1>
+      <p>Real work from our team. Updated regularly.</p>
+      <div id="galleryFilters" class="filter-bar reveal d1" aria-label="Gallery categories">
+        <button class="pill active" data-cat="">View All</button>
+        <!-- dynamic category pills will be inserted here by JS -->
+      </div>
+      <div id="galleryGrid" class="gallery-grid reveal d2" aria-live="polite"></div>
+      <!-- Lightbox -->
+      <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" aria-hidden="true">
+        <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
+        <div class="lightbox-inner">
+          <img id="lbImg" class="lightbox-img" alt="Gallery image" />
+          <div class="lightbox-body">
+            <h3 id="lbTitle"></h3>
+            <p id="lbDesc"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container copyright">© <span id="year"></span> John Plumber.</div>
+  </footer>
+
+  <a href="https://wa.me/254707047674" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <img src="assets/images/whatsapp.svg" alt="WhatsApp" />
+  </a>
+
+  <script src="assets/js/firebase.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/gallery.js"></script>
+</body>
+</html>
