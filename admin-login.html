@@ -64,6 +64,12 @@
           try{
             const email = (emailEl.value || '').trim();
             if (!email){ msg.textContent = 'Enter your email first to receive a reset link.'; return; }
+            msg.textContent = 'Checking user...';
+            const methods = await firebase.auth().fetchSignInMethodsForEmail(email);
+            if (methods.length === 0) {
+              msg.textContent = 'User with this email does not exist.';
+              return;
+            }
             msg.textContent = 'Sending reset email...';
             await firebase.auth().sendPasswordResetEmail(email);
             msg.textContent = 'Password reset email sent. Check your inbox.';
@@ -87,7 +93,16 @@
           await window.fb.authSignIn(email, password);
           location.href = 'admin.html';
         } catch (err) {
-          msg.textContent = err && err.message ? err.message : 'Login failed';
+          switch (err.code) {
+            case 'auth/invalid-credential':
+            case 'auth/wrong-password':
+            case 'auth/user-not-found':
+              msg.textContent = 'Invalid email or password.';
+              break;
+            default:
+              msg.textContent = err.message || 'Login failed';
+              break;
+          }
         } finally {
           btn.disabled = false; btn.textContent = 'Login';
         }
