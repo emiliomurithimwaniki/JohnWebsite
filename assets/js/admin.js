@@ -17,6 +17,87 @@
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn){ logoutBtn.addEventListener('click', ()=> fb.authSignOut()); }
 
+    // Tabs: show one admin section at a time via hash
+    (function initTabs(){
+      const sections = Array.from(document.querySelectorAll('.tab-section'));
+      if (!sections.length) return; // nothing to do
+      const menuLinks = Array.from(document.querySelectorAll('.admin-menu a[href^="#"], .admin-nav a[href^="#"]'));
+
+      function normalizeHash(h){
+        if (!h) return '#upload';
+        if (h.charAt(0) !== '#') return '#' + h;
+        return h;
+      }
+
+      function activate(hash){
+        const h = normalizeHash(hash);
+        const id = h.slice(1);
+        // toggle sections
+        sections.forEach(sec => {
+          if (sec.id === id) sec.classList.add('active');
+          else sec.classList.remove('active');
+        });
+        // toggle link active state
+        menuLinks.forEach(a => {
+          const href = a.getAttribute('href');
+          if (!href || href.charAt(0) !== '#') return;
+          if (normalizeHash(href) === h) a.classList.add('active');
+          else a.classList.remove('active');
+        });
+      }
+
+      // click handling (allow default anchor behavior to set hash)
+      menuLinks.forEach(a => {
+        a.addEventListener('click', (e)=>{
+          const href = a.getAttribute('href') || '';
+          if (href.startsWith('#')){
+            // allow hash change, then activate when event fires
+            // but also activate immediately for snappier UX
+            activate(href);
+          }
+        });
+      });
+
+      window.addEventListener('hashchange', ()=> activate(location.hash));
+      // initial
+      activate(location.hash || '#upload');
+    })();
+
+    // Mobile sidebar toggle (off-canvas)
+    (function initMobileSidebar(){
+      const toggle = document.getElementById('adminMenuToggle');
+      const sidebar = document.getElementById('adminSidebar');
+      const overlay = document.getElementById('adminOverlay');
+      if (!toggle || !sidebar || !overlay) return;
+
+      function open(){
+        sidebar.classList.add('open');
+        sidebar.setAttribute('aria-hidden','false');
+        overlay.classList.add('show');
+        overlay.removeAttribute('hidden');
+        toggle.setAttribute('aria-expanded','true');
+      }
+      function close(){
+        sidebar.classList.remove('open');
+        sidebar.setAttribute('aria-hidden','true');
+        overlay.classList.remove('show');
+        overlay.setAttribute('hidden','');
+        toggle.setAttribute('aria-expanded','false');
+      }
+      function toggleMenu(){
+        if (sidebar.classList.contains('open')) close(); else open();
+      }
+
+      toggle.addEventListener('click', toggleMenu);
+      overlay.addEventListener('click', close);
+      document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') close(); });
+      // Close after selecting a menu link (mobile)
+      sidebar.addEventListener('click', (e)=>{
+        const a = e.target.closest && e.target.closest('a[href^="#"]');
+        if (a) close();
+      });
+    })();
+
     // EmailJS Test Panel (?test=1)
     try{
       const params = new URLSearchParams(location.search);
@@ -102,30 +183,40 @@
         if (!title || !description){ uploadMsg.textContent = 'Enter title and description.'; return; }
         if (!category){ uploadMsg.textContent = 'Please select a category.'; return; }
 
-        // Prefer URL if provided
-        if (urlInput){
-          try{
-            new URL(urlInput); // validate
-          }catch{ uploadMsg.textContent = 'Invalid Image URL.'; return; }
-          uploadMsg.textContent = 'Saving...';
-          try{
-            await fb.db.collection('gallery').add({
-              title,
-              description,
-              imageUrl: urlInput,
-              category,
-              tags,
-              createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            uploadForm.reset();
-            uploadMsg.textContent = 'Saved with Image URL.';
-          }catch(err){
-            uploadMsg.textContent = err.message || 'Save failed';
-          }
+        // Build list of image URLs to save
+        let urls = [];
+        if (typeof captureQueue !== 'undefined' && captureQueue.length){
+          urls = [...captureQueue];
+        } else if (urlInput){
+          try{ new URL(urlInput); }catch{ uploadMsg.textContent = 'Invalid Image URL.'; return; }
+          urls = [urlInput];
+        } else {
+          uploadMsg.textContent = 'Add at least one photo: capture/confirm or provide an Image URL.';
           return;
         }
 
-        uploadMsg.textContent = 'Provide an Image URL. Use "Get a LINK" to upload via Cloudinary and auto-fill the URL.';
+        uploadMsg.textContent = `Saving ${urls.length} photo${urls.length>1?'s':''}...`;
+        try{
+          const batchAdds = urls.map(u => fb.db.collection('gallery').add({
+            title,
+            description,
+            imageUrl: u,
+            category,
+            tags,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          }));
+          await Promise.all(batchAdds);
+          // Reset form and queue
+          uploadForm.reset();
+          if (typeof captureQueue !== 'undefined'){ captureQueue.length = 0; }
+          if (typeof renderQueue === 'function') renderQueue();
+          if (metaFields) metaFields.style.display = 'none';
+          if (cameraStatus) cameraStatus.textContent = '';
+          if (cameraPreview){ cameraPreview.removeAttribute('src'); cameraPreview.style.display='none'; }
+          uploadMsg.textContent = `Uploaded ${urls.length} photo${urls.length>1?'s':''}.`;
+        }catch(err){
+          uploadMsg.textContent = err.message || 'Save failed';
+        }
       });
     }
 
@@ -135,6 +226,17 @@
     const cloudUploadMsg = document.getElementById('cloudUploadMsg');
     const cloudDropzone = document.getElementById('cloudDropzone');
     const cloudProgress = document.getElementById('cloudProgress');
+    const openCameraBtn = document.getElementById('openCameraBtn');
+    const cameraInput = document.getElementById('cameraInput');
+    const pickFileBtn = document.getElementById('pickFileBtn');
+    const cameraPreview = document.getElementById('cameraPreview');
+    const cameraStatus = document.getElementById('cameraStatus');
+    const captureCtas = document.getElementById('captureCtas');
+    const confirmCaptureBtn = document.getElementById('confirmCaptureBtn');
+    const retakeBtn = document.getElementById('retakeBtn');
+    const photoQueueEl = document.getElementById('photoQueue');
+    const metaFields = document.getElementById('metaFields');
+    const queueCount = document.getElementById('queueCount');
     // Modal elements
     const cloudModal = document.getElementById('cloudModal');
     const openCloudModalBtn = document.getElementById('openCloudModalBtn');
@@ -291,6 +393,88 @@
       });
     }
 
+    // Capture-first flow state
+    const captureQueue = [];
+    let pendingFile = null;
+
+    function renderQueue(){
+      if (!photoQueueEl) return;
+      if (!captureQueue.length){ photoQueueEl.innerHTML = '<small class="muted">No photos queued yet.</small>'; return; }
+      photoQueueEl.innerHTML = captureQueue.map((u,i)=>`<div class="qitem"><img src="${u}" alt="q${i}"/><button type="button" data-i="${i}" class="qremove btn btn-outline small">Remove</button></div>`).join('');
+      photoQueueEl.querySelectorAll('.qremove').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const i = Number(btn.getAttribute('data-i'));
+          if (!Number.isNaN(i)){
+            captureQueue.splice(i,1);
+            renderQueue();
+          }
+        });
+      });
+      // Show meta fields when at least 1 photo is queued
+      if (metaFields && captureQueue.length>0){ metaFields.style.display = ''; }
+      if (queueCount){ queueCount.textContent = String(captureQueue.length); }
+    }
+
+    function setPendingFile(file){
+      pendingFile = file || null;
+      if (cameraPreview){
+        if (pendingFile){
+          try{ cameraPreview.src = URL.createObjectURL(pendingFile); cameraPreview.style.display='block'; }catch{}
+        } else {
+          cameraPreview.removeAttribute('src');
+          cameraPreview.style.display='none';
+        }
+      }
+      if (captureCtas) captureCtas.style.display = pendingFile ? '' : 'none';
+      if (cameraStatus) cameraStatus.textContent = pendingFile ? 'Review the preview, then confirm or retake.' : '';
+    }
+
+    async function confirmPending(){
+      if (!pendingFile) return;
+      const { cloudName, preset } = getCloudCreds();
+      const targetMsg = cloudUploadMsg || uploadMsg;
+      if (!cloudName || !preset){
+        if (targetMsg) targetMsg.textContent = 'Provide Cloud name and Unsigned preset before confirming.';
+        return;
+      }
+      if (cameraStatus) cameraStatus.textContent = 'Uploading...';
+      try{
+        const url = await uploadToCloudinary(pendingFile, cloudName, preset);
+        captureQueue.push(url);
+        renderQueue();
+        setPendingFile(null);
+        if (cameraStatus) cameraStatus.textContent = 'Added to queue.';
+        // also reflect in Image URL with last item for convenience
+        setUrlAndCopy(url);
+      }catch(err){
+        if (cameraStatus) cameraStatus.textContent = (err && err.message) ? err.message : 'Upload failed';
+      }
+    }
+
+    // Open camera
+    if (openCameraBtn && cameraInput){
+      openCameraBtn.addEventListener('click', ()=>{ cameraInput.value=''; cameraInput.click(); });
+      cameraInput.addEventListener('change', (e)=>{
+        const f = e.target && e.target.files && e.target.files[0];
+        if (f) setPendingFile(f);
+      });
+    }
+    // Pick from files (no immediate upload)
+    if (pickFileBtn){
+      pickFileBtn.addEventListener('click', ()=>{
+        const input = document.createElement('input');
+        input.type='file'; input.accept='image/*';
+        input.addEventListener('change', ev=>{
+          const f = ev.target && ev.target.files && ev.target.files[0];
+          if (f) setPendingFile(f);
+        });
+        input.click();
+      });
+    }
+    if (confirmCaptureBtn) confirmCaptureBtn.addEventListener('click', confirmPending);
+    if (retakeBtn) retakeBtn.addEventListener('click', ()=> setPendingFile(null));
+    renderQueue();
+
     if (copyGUrlBtn){
       copyGUrlBtn.addEventListener('click', async ()=>{
         const val = document.getElementById('gUrl')?.value || '';
@@ -433,7 +617,6 @@
     if (ordersList){
       const header = document.createElement('div');
       header.className = 'row header';
-      header.style.gridTemplateColumns = '2fr 1fr 1fr 1fr';
       header.innerHTML = '<div>Name & Contact</div><div>Service</div><div>Date</div><div>Status</div>';
       ordersList.appendChild(header);
 
@@ -450,7 +633,6 @@
         if (snap.empty){
           const empty = document.createElement('div');
           empty.className = 'row';
-          empty.style.gridTemplateColumns = '2fr 1fr 1fr 1fr';
           empty.innerHTML = '<div class="muted">No orders yet.</div><div></div><div></div><div></div>';
           ordersList.appendChild(empty);
           return;
@@ -460,7 +642,6 @@
           const d = doc.data();
           const row = document.createElement('div');
           row.className = 'row';
-          row.style.gridTemplateColumns = '2fr 1fr 1fr 1fr';
           row.setAttribute('data-id', doc.id);
           // cache useful fields for notifications
           if (d.name) row.setAttribute('data-name', d.name);
@@ -492,7 +673,7 @@
         if (/Missing or insufficient permissions|permission-denied/i.test(readable)){
           readable = 'Cannot load orders due to Firestore security rules (permission denied).';
         }
-        row.style.gridTemplateColumns = '2fr 1fr 1fr 1fr';
+        
         row.innerHTML = `<div class="muted">${readable}</div><div></div><div></div><div></div>`;
         ordersList.appendChild(row);
       });

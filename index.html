@@ -6,12 +6,28 @@
   <title>John Plumber Services | Reliable Plumbers Near You</title>
   <meta name="description" content="Professional plumbing services: leak repairs, pipe installation, bathroom and kitchen plumbing, emergency services. Fast, reliable, and affordable." />
   <meta name="keywords" content="plumber, plumbing services, leak repair, emergency plumber, pipe installation, Nairobi plumbing" />
+  <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://johnplumber.co.ke/" />
+  <meta property="og:title" content="John Plumber Services | Reliable Plumbers Near You" />
+  <meta property="og:description" content="Professional plumbing services you can trust. Fast, reliable, and affordable in Nairobi & beyond." />
+  <meta property="og:image" content="https://johnplumber.co.ke/assets/images/hero-plumber.svg" />
+  <meta property="og:image:alt" content="John Plumber — professional plumbing services" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="John Plumber Services | Reliable Plumbers Near You" />
+  <meta name="twitter:description" content="Professional plumbing services you can trust. Fast, reliable, and affordable in Nairobi & beyond." />
+  <meta name="twitter:image" content="https://johnplumber.co.ke/assets/images/hero-plumber.svg" />
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/home.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="theme-teal">
+<body class="theme-teal has-mbar">
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="/"><img class="logo-mark" src="assets/images/logo.svg" alt="" aria-hidden="true"/> John Plumber</a>
@@ -34,23 +50,44 @@
         </video>
       </div>
       <div class="container hero-inner">
-        <div class="hero-text">
-          <h1 class="reveal">Reliable Plumbing Services You Can Trust</h1>
+        <div class="hero-text hero-animated">
+          <div class="hero-eyebrow reveal">Nairobi • 24/7 Emergency Support</div>
+          <h1 class="reveal">
+            Reliable Plumbing <span class="typing-text-container"><span id="typing-text"></span><span class="cursor"></span></span>
+          </h1>
           <p class="reveal d1">From leaks to full installations, we deliver professional plumbing solutions—fast and affordable.</p>
+
+          <div class="hero-badges reveal d1" aria-label="Trust badges">
+            <span class="pill">10+ Years Experience</span>
+            <span class="pill">Licensed & Insured</span>
+            <span class="pill">Same‑Day Service</span>
+          </div>
+
           <div class="cta-group reveal d2">
             <a class="btn btn-primary" href="quote.html">Request a Quote</a>
-            <a class="btn btn-outline" href="tel:+254707047674">Call Now</a>
           </div>
         </div>
         
       </div>
     </section>
 
+    <!-- Trust/brand strip -->
+    <section class="brand-strip section">
+      <div class="container">
+        <div class="brand-row reveal">
+          <div class="brand-badge">Trusted • 10+ Years</div>
+          <div class="brand-badge">Same‑Day Service</div>
+          <div class="brand-badge">Licensed & Insured</div>
+          <div class="brand-badge">Nairobi & Beyond</div>
+        </div>
+      </div>
+    </section>
+
     <section class="services section">
       <div class="container reveal">
-        <h2>Services We Offer</h2>
+        <h2 class="animate-on-scroll fade-in-up">Services We Offer</h2>
         <div class="cards">
-          <div class="card reveal" data-category="leak-detection">
+          <div class="card animate-on-scroll zoom-in" data-category="leak-detection">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M21 7a4 4 0 0 1-5 3L9 17l-3 1 1-3 7-7a4 4 0 1 1 7-1z"/></svg>
             </span>
@@ -59,7 +96,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=leak-detection" aria-label="View Leak Detection & Repair projects"></a>
           </div>
-          <div class="card reveal d1" data-category="pipe-installation">
+          <div class="card animate-on-scroll zoom-in" data-category="pipe-installation" style="animation-delay: 0.1s;">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M3 10h18v4H3zM6 14v3h3v-3M15 14v3h3v-3"/></svg>
             </span>
@@ -68,7 +105,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=pipe-installation" aria-label="View Pipe Installation projects"></a>
           </div>
-          <div class="card reveal d2" data-category="bathroom-kitchen">
+          <div class="card animate-on-scroll zoom-in" data-category="bathroom-kitchen" style="animation-delay: 0.2s;">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M5 10h7V7a3 3 0 1 1 6 0v3h1v4H5z"/></svg>
             </span>
@@ -77,7 +114,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=bathroom-kitchen" aria-label="View Bathroom and Kitchen projects"></a>
           </div>
-          <div class="card reveal d3" data-category="drain-cleaning">
+          <div class="card animate-on-scroll zoom-in" data-category="drain-cleaning" style="animation-delay: 0.3s;">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M4 12c6-6 10 6 16 0v6H4z"/></svg>
             </span>
@@ -86,7 +123,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=drain-cleaning" aria-label="View Drain Cleaning projects"></a>
           </div>
-          <div class="card reveal">
+          <div class="card animate-on-scroll zoom-in">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 3l4 5-4 5-4-5 4-5zm-2 13h4l2 5H8l2-5z"/></svg>
             </span>
@@ -95,7 +132,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=water-heaters" aria-label="View Water Heaters projects"></a>
           </div>
-          <div class="card reveal d1">
+          <div class="card animate-on-scroll zoom-in" style="animation-delay: 0.1s;">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 2l2 4 4 2-4 2-2 4-2-4-4-2 4-2 2-4zM5 18h14v2H5z"/></svg>
             </span>
@@ -105,7 +142,7 @@
             <a class="card-link" href="gallery.html?category=emergency-plumbing" aria-label="View Emergency Plumbing projects"></a>
           </div>
           <!-- Added services -->
-          <div class="card reveal d2">
+          <div class="card animate-on-scroll zoom-in" style="animation-delay: 0.2s;">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M3 21h18v-2H3v2zm3-5h4l2-3 2 3h4l-6-10-6 10z"/></svg>
             </span>
@@ -114,7 +151,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=general-plumbing" aria-label="View General Plumbing projects"></a>
           </div>
-          <div class="card reveal d3">
+          <div class="card animate-on-scroll zoom-in" style="animation-delay: 0.3s;">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M4 18c6-8 10 8 16 0v2H4v-2zm5-9a3 3 0 1 0-6 0 3 3 0 0 0 6 0z"/></svg>
             </span>
@@ -123,7 +160,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=drip-irrigation-systems" aria-label="View Drip Irrigation Systems projects"></a>
           </div>
-          <div class="card reveal">
+          <div class="card animate-on-scroll zoom-in">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M3 11h18l-2 7H5l-2-7zm3-4h12l-1 3H7l-1-3zM9 5h6l-1 2H10L9 5z"/></svg>
             </span>
@@ -132,7 +169,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=solar-water-heaters" aria-label="View Solar Water Heaters projects"></a>
           </div>
-          <div class="card reveal d1">
+          <div class="card animate-on-scroll zoom-in" style="animation-delay: 0.1s;">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M7 4h10v3H7V4zm-3 7h16l-2 9H6l-2-9zm7-7h2v3h-2V4z"/></svg>
             </span>
@@ -141,7 +178,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=solar-water-pumps" aria-label="View Solar Water Pumps projects"></a>
           </div>
-          <div class="card reveal d2">
+          <div class="card animate-on-scroll zoom-in" style="animation-delay: 0.2s;">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M7 20V7a5 5 0 0 1 10 0v13h-2V7a3 3 0 0 0-6 0v13H7z"/></svg>
             </span>
@@ -150,7 +187,7 @@
             <div class="card-cta">View Gallery</div>
             <a class="card-link" href="gallery.html?category=laboratory-gas-fittings" aria-label="View Laboratory Gas Fittings projects"></a>
           </div>
-          <div class="card reveal d3">
+          <div class="card animate-on-scroll zoom-in" style="animation-delay: 0.3s;">
             <span class="service-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M2 18c6-6 14-6 20 0v2H2v-2zM4 10h16v2H4z"/></svg>
             </span>
@@ -166,20 +203,175 @@
       </div>
     </section>
 
+    <!-- Why choose us -->
+    <section class="features section">
+      <div class="container reveal">
+        <h2 class="animate-on-scroll fade-in-up">Why Choose John Plumber</h2>
+        <div class="feature-grid">
+          <div class="feature animate-on-scroll zoom-in">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 6l-11 11-5-5 2-2 3 3L18 4z"/></svg>
+            </div>
+            <h3>Quality Workmanship</h3>
+            <p>Skilled technicians using durable materials for lasting results.</p>
+          </div>
+          <div class="feature animate-on-scroll zoom-in">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 8V4l8 8-8 8v-4H4V8z"/></svg>
+            </div>
+            <h3>Fast Response</h3>
+            <p>Quick scheduling and same‑day service options.</p>
+          </div>
+          <div class="feature animate-on-scroll zoom-in">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg>
+            </div>
+            <h3>Transparent Pricing</h3>
+            <p>Clear quotes with no hidden fees.</p>
+          </div>
+          <div class="feature animate-on-scroll zoom-in">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 17l-5 3 1.9-5.8L4 10h6l2-6 2 6h6l-4.9 4.2L17 20z"/></svg>
+            </div>
+            <h3>Top‑Rated Service</h3>
+            <p>Happy customers across homes, farms, and businesses.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats band -->
+    <section class="stats-band">
+      <div class="container stats-inner reveal">
+        <div class="stat">
+          <div class="num">1,500+</div>
+          <div class="label">Projects Completed</div>
+        </div>
+        <div class="stat">
+          <div class="num">98%</div>
+          <div class="label">On‑Time Response</div>
+        </div>
+        <div class="stat">
+          <div class="num">24/7</div>
+          <div class="label">Emergency Support</div>
+        </div>
+        <div class="stat">
+          <div class="num">4.9★</div>
+          <div class="label">Average Rating</div>
+        </div>
+      </div>
+    </section>
+
     <section class="about section">
       <div class="container reveal">
-        <h2>About Us</h2>
-        <p>At John Plumber, we are committed to delivering reliable and professional plumbing solutions tailored to your needs. With years of experience, we specialize in a wide range of services including general plumbing, drip irrigation systems, installation of solar water heaters, solar water pumps, laboratory gas fittings, and dam liners.</p>
-        <p>Our mission is to provide high-quality, sustainable, and cost-effective solutions that make your home, business, or farm more efficient. Whether it’s fixing a leak, setting up modern water systems, or installing eco-friendly solar equipment, you can count on us for excellence, innovation, and customer satisfaction.</p>
-        <ul class="checklist">
-          <li>General plumbing</li>
-          <li>Drip irrigation systems</li>
-          <li>Installation of solar water heaters</li>
-          <li>Solar water pumps</li>
-          <li>Laboratory gas fittings</li>
-          <li>Dam liners</li>
-        </ul>
-        <p><strong>We don’t just fix problems — we build lasting solutions.</strong></p>
+        <div class="about-grid">
+          <div class="about-content">
+            <h2>About Us</h2>
+            <p class="about-lead">At John Plumber, we deliver reliable, professional solutions tailored to your needs — from fast leak repairs to complete water system installs for homes, businesses, and farms.</p>
+            <div class="badges">
+              <span class="pill">10+ Years Experience</span>
+              <span class="pill">Licensed & Insured</span>
+              <span class="pill">Same‑Day Service</span>
+            </div>
+
+            <div class="about-cards">
+              <div class="a-card">
+                <div class="a-ico" aria-hidden="true">⚡</div>
+                <div>
+                  <h3>Fast Response</h3>
+                  <p>Quick scheduling and 24/7 emergency support.</p>
+                </div>
+              </div>
+              <div class="a-card">
+                <div class="a-ico" aria-hidden="true">🏅</div>
+                <div>
+                  <h3>Quality Assured</h3>
+                  <p>Skilled technicians and durable materials.</p>
+                </div>
+              </div>
+              <div class="a-card">
+                <div class="a-ico" aria-hidden="true">💬</div>
+                <div>
+                  <h3>Clear Pricing</h3>
+                  <p>Upfront quotes with no hidden fees.</p>
+                </div>
+              </div>
+            </div>
+
+            <ul class="checklist">
+              <li>General plumbing</li>
+              <li>Drip irrigation systems</li>
+              <li>Installation of solar water heaters</li>
+              <li>Solar water pumps</li>
+              <li>Laboratory gas fittings</li>
+              <li>Dam liners</li>
+            </ul>
+            <p><strong>We don’t just fix problems — we build lasting solutions.</strong></p>
+            <p><a class="btn btn-outline" href="about.html">Read more about us</a></p>
+          </div>
+
+          <div class="about-media">
+            <div class="media-card">
+              <div class="img-carousel" data-auto="5000" aria-label="Gallery carousel">
+                <button class="icar-nav icar-prev" aria-label="Previous image">‹</button>
+                <div class="icar-track"></div>
+                <button class="icar-nav icar-next" aria-label="Next image">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials carousel -->
+    <section class="testimonials section">
+      <div class="container reveal">
+        <h2>What Our Clients Say</h2>
+        <div class="carousel" data-auto="6000">
+          <button class="carousel-nav prev" aria-label="Previous testimonial">‹</button>
+          <div class="carousel-track">
+            <article class="tcard">
+              <div class="rating" aria-label="Rating 5 out of 5">★★★★★</div>
+              <p>“Professional and fast! Fixed a major leak the same day. Highly recommend.”</p>
+              <div class="tmeta">— Anne K., Nairobi</div>
+              <div class="quote-icon" aria-hidden="true">“</div>
+            </article>
+            <article class="tcard">
+              <div class="rating" aria-label="Rating 5 out of 5">★★★★★</div>
+              <p>“Installed our solar water heater perfectly. Great pricing and communication.”</p>
+              <div class="tmeta">— Peter M., Ruaka</div>
+              <div class="quote-icon" aria-hidden="true">“</div>
+            </article>
+            <article class="tcard">
+              <div class="rating" aria-label="Rating 5 out of 5">★★★★★</div>
+              <p>“Their drip irrigation setup has saved us water and time. Excellent service.”</p>
+              <div class="tmeta">— GreenFields Farm</div>
+              <div class="quote-icon" aria-hidden="true">“</div>
+            </article>
+          </div>
+          <button class="carousel-nav next" aria-label="Next testimonial">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ accordion -->
+    <section class="faq section">
+      <div class="container reveal">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Do you offer emergency plumbing services?</button>
+            <div class="faq-a">Yes, we provide 24/7 emergency support for urgent issues like major leaks and blockages.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Which areas do you serve?</button>
+            <div class="faq-a">We are based in Nairobi and serve surrounding regions across Kenya.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">Can I get a quote online?</button>
+            <div class="faq-a">Yes—use our <a href="quote.html">Get a Quote</a> form and we’ll respond quickly.</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -192,12 +384,25 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <h4>John Plumber</h4>
-        <p>Quality plumbing solutions for homes and businesses.</p>
+    <div class="container footer-cta">
+      <h3>Need help with a plumbing issue?</h3>
+      <div class="footer-actions">
+        <a class="btn-foot primary" href="tel:+254707047674">Call Now</a>
+        <a class="btn-foot ghost" href="https://wa.me/254707047674" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        <a class="btn-foot" href="quote.html">Get a Quote</a>
       </div>
-      <div>
+    </div>
+
+    <div class="container footer-grid">
+      <div class="foot-col">
+        <h4>John Plumber</h4>
+        <p>Quality plumbing solutions for homes and businesses across Nairobi and surrounding regions.</p>
+        <ul class="foot-meta">
+          <li>Mon–Sat: 7:00am – 8:00pm</li>
+          <li>Emergency: 24/7</li>
+        </ul>
+      </div>
+      <div class="foot-col">
         <h4>Quick Links</h4>
         <ul>
           <li><a href="gallery.html">Gallery</a></li>
@@ -206,21 +411,41 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
-      <div>
+      <div class="foot-col">
         <h4>Contact</h4>
         <ul>
           <li><a href="mailto:Johnplumber011@gmail.com">Johnplumber011@gmail.com</a></li>
           <li><a href="tel:+254707047674">+254 707 047 674</a></li>
+          <li>Nairobi, Kenya</li>
         </ul>
       </div>
     </div>
-    <div class="container copyright">© <span id="year"></span> John Plumber. All rights reserved.</div>
-    <div class="container developer-credit">Website developed by <strong>EmilioTech</strong>. <a href="https://wa.me/254796031071?text=Hey%20Im%20interested%20in%20your%20products%20like%20johnplumber.com%20website" target="_blank" rel="noopener">Get yours also here</a>.</div>
+
+    <div class="container foot-bottom">
+      <div class="copyright">© <span id="year"></span> John Plumber. All rights reserved.</div>
+      <div class="developer-credit">Website by <strong>EmilioTech</strong>. <a href="https://wa.me/254796031071?text=Hey%20Im%20interested%20in%20your%20products%20like%20johnplumber.com%20website" target="_blank" rel="noopener">Get yours</a>.</div>
+    </div>
   </footer>
 
   <a href="https://wa.me/254707047674" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="assets/images/whatsapp.svg" alt="WhatsApp" />
   </a>
+
+  <!-- Mobile Action Bar -->
+  <nav class="mbar" aria-label="Quick actions">
+    <a class="mbar-item" href="tel:+254707047674">
+      <span class="mbar-ico" aria-hidden="true">📞</span>
+      <span class="mbar-txt">Call</span>
+    </a>
+    <a class="mbar-item" href="https://wa.me/254707047674" target="_blank" rel="noopener">
+      <span class="mbar-ico" aria-hidden="true">💬</span>
+      <span class="mbar-txt">WhatsApp</span>
+    </a>
+    <a class="mbar-item" href="quote.html">
+      <span class="mbar-ico" aria-hidden="true">📝</span>
+      <span class="mbar-txt">Quote</span>
+    </a>
+  </nav>
 
   <script src="assets/js/firebase.js"></script>
   <script src="assets/js/main.js"></script>

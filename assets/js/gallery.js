@@ -1,7 +1,29 @@
 (function(){
   const grid = document.getElementById('galleryGrid');
   const filtersEl = document.getElementById('galleryFilters');
+  const searchEl = document.getElementById('gallerySearch');
   if (!grid) return;
+
+  // Keep last fetched items in memory for client-side filtering
+  let latestItems = [];
+
+  function renderSkeleton(count = 6){
+    const frag = document.createDocumentFragment();
+    for (let i=0;i<count;i++){
+      const sk = document.createElement('div');
+      sk.className = 'skeleton-card';
+      sk.innerHTML = `
+        <div class="skeleton-thumb"></div>
+        <div class="skeleton-body">
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      `;
+      frag.appendChild(sk);
+    }
+    grid.innerHTML = '';
+    grid.appendChild(frag);
+  }
 
   function card(item){
     const div = document.createElement('div');
@@ -40,6 +62,8 @@
 
     const params = new URLSearchParams(location.search);
     let activeCat = (params.get('category') || '').toLowerCase();
+    let query = (params.get('q') || '').trim();
+    if (searchEl) searchEl.value = query;
 
     function normalize(val){
       return String(val || '')
@@ -53,6 +77,19 @@
       const tags = Array.isArray(item.tags) ? item.tags.map(normalize) : [];
       const cats = Array.isArray(item.categories) ? item.categories.map(normalize) : [];
       return c1 === cat || tags.includes(cat) || cats.includes(cat);
+    }
+
+    function matchesQuery(item, q){
+      if (!q) return true;
+      const s = q.toLowerCase();
+      const hay = [
+        item.title || '',
+        item.description || '',
+        item.category || '',
+        ...(Array.isArray(item.tags) ? item.tags : []),
+        ...(Array.isArray(item.categories) ? item.categories : []),
+      ].join(' ').toLowerCase();
+      return hay.includes(s);
     }
 
     function toLabel(slug){
@@ -110,6 +147,18 @@
       }
     }
 
+    function applyFilters(){
+      const filtered = latestItems
+        .filter(it => matchesCategory(it, activeCat))
+        .filter(it => matchesQuery(it, query));
+      // Keep query in URL
+      const url = new URL(location.href);
+      if (query) url.searchParams.set('q', query);
+      else url.searchParams.delete('q');
+      history.replaceState(null, '', url);
+      render(filtered);
+    }
+
     // Lightbox elements
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
@@ -148,16 +197,19 @@
     lb && lb.addEventListener('click', (e)=>{ if (e.target === lb) closeLB(); });
     document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeLB(); });
 
+    // Initial skeleton while loading
+    renderSkeleton(8);
+
     db.collection('gallery')
       .orderBy('createdAt','desc')
       .onSnapshot(snap => {
         const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        latestItems = items;
         if (filtersEl){
           const cats = buildCategories(items);
           renderFilters(cats);
         }
-        const filtered = items.filter(it => matchesCategory(it, activeCat));
-        render(filtered);
+        applyFilters();
       }, err => {
         console.error(err);
         grid.innerHTML = '<p>Failed to load gallery.</p>';
@@ -172,17 +224,33 @@
         setActive(cat);
         // Re-filter current items without waiting for new snapshot
         // We'll query the DOM cache via latest snapshot by re-triggering render via a quick read
-        const db2 = window.fb && window.fb.db;
-        if (!db2) return;
-        db2.collection('gallery')
-          .orderBy('createdAt','desc')
-          .get()
-          .then(snap=>{
-            const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            const filtered = items.filter(it => matchesCategory(it, activeCat));
-            render(filtered);
-          })
-          .catch(console.error);
+        // Client-side filter using cached items
+        applyFilters();
+      });
+    }
+
+    // Search field: debounce and filter client-side
+    if (searchEl){
+      let t;
+      const onChange = ()=>{
+        query = (searchEl.value || '').trim();
+        applyFilters();
+      };
+      const debounced = ()=>{
+        clearTimeout(t);
+        t = setTimeout(onChange, 200);
+      };
+      searchEl.addEventListener('input', debounced);
+      searchEl.addEventListener('keydown', (e)=>{
+        if (e.key === 'Escape'){
+          searchEl.value = '';
+          query = '';
+          applyFilters();
+        }
+        if (e.key === 'Enter'){
+          e.preventDefault();
+          onChange();
+        }
       });
     }
   }

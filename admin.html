@@ -8,12 +8,22 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header admin-topbar">
     <div class="container header-inner">
       <a class="logo" href="#">Admin</a>
-      <nav class="nav">
-        <button id="logoutBtn" class="btn btn-outline small">Logout</button>
-      </nav>
+      <div class="header-actions" style="display:flex;align-items:center;gap:10px;">
+        <button id="adminMenuToggle" class="admin-menu-toggle" aria-controls="adminSidebar" aria-expanded="false" aria-label="Toggle menu">
+          <span class="hamburger" aria-hidden="true">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </span>
+          Menu
+        </button>
+        <nav class="nav">
+          <button id="logoutBtn" class="btn btn-outline small">Logout</button>
+        </nav>
+      </div>
     </div>
   <!-- Order Details Modal -->
   <div id="orderModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
@@ -43,35 +53,51 @@
 
   <main class="section">
     <div class="container">
-      <h1>Admin Dashboard</h1>
-      <p class="muted" style="margin-top:-6px">Manage gallery uploads, client orders, and reviews.</p>
+      <div class="admin-layout">
+        <aside id="adminSidebar" class="admin-sidebar" aria-hidden="true">
+          <div class="brand">Admin <span class="badge">Dashboard</span></div>
+          <nav>
+            <ul class="admin-menu" aria-label="Admin sections">
+              <li><a href="#upload">📤 Upload</a></li>
+              <li><a href="#orders">📦 Orders</a></li>
+              <li><a href="#reviews">⭐ Reviews</a></li>
+              <li><a href="#manageGallery">🖼️ Gallery</a></li>
+              <li><a href="gallery.html" target="_blank" rel="noopener">↗ Open Public Gallery</a></li>
+            </ul>
+          </nav>
+        </aside>
+        <div id="adminOverlay" class="admin-overlay" hidden></div>
+        <div class="admin-main">
+          <h1>Admin Dashboard</h1>
+          <p class="muted" style="margin-top:-6px">Manage gallery uploads, client orders, and reviews.</p>
 
-      <div class="admin-nav" role="navigation" aria-label="Admin sections">
-        <a class="pill" href="#upload">Upload</a>
-        <a class="pill" href="#orders">Orders</a>
-        <a class="pill" href="#reviews">Reviews</a>
-        <span class="flex-spacer"></span>
-        <a class="pill ghost" href="gallery.html" target="_blank" rel="noopener">Open Gallery ↗</a>
-      </div>
+          <div class="admin-nav" role="navigation" aria-label="Admin sections">
+            <a class="pill" href="#upload">Upload</a>
+            <a class="pill" href="#orders">Orders</a>
+            <a class="pill" href="#reviews">Reviews</a>
+            <span class="flex-spacer"></span>
+            <a class="pill ghost" href="gallery.html" target="_blank" rel="noopener">Open Gallery ↗</a>
+          </div>
 
-      <div class="admin-grid">
-      <section id="upload" class="card-block admin-card span-2">
+          <div class="admin-grid">
+      <section id="upload" class="card-block admin-card span-2 tab-section active">
         <div class="admin-section-title">
           <h2>Upload Gallery Item</h2>
           <p class="inline-help">Quickly upload via Cloudinary or paste any public image URL.</p>
         </div>
         <form id="uploadForm" class="form" enctype="multipart/form-data">
-          <div class="form-row">
-            <label for="gTitle">Title</label>
-            <input id="gTitle" type="text" required />
-          </div>
-          <div class="form-row">
-            <label for="gDesc">Description</label>
-            <textarea id="gDesc" required></textarea>
-          </div>
-          <div class="form-row">
-            <label for="gCategory">Category</label>
-            <select id="gCategory" required>
+          <div id="metaFields" style="display:none">
+            <div class="form-row">
+              <label for="gTitle">Title</label>
+              <input id="gTitle" type="text" required />
+            </div>
+            <div class="form-row">
+              <label for="gDesc">Description</label>
+              <textarea id="gDesc" required></textarea>
+            </div>
+            <div class="form-row">
+              <label for="gCategory">Category</label>
+              <select id="gCategory" required>
               <option value="">-- Select Category --</option>
               <option value="leak-detection">Leak Detection & Repair</option>
               <option value="pipe-installation">Pipe Installation</option>
@@ -86,24 +112,51 @@
               <option value="laboratory-gas-fittings">Laboratory Gas Fittings</option>
               <option value="dam-liners">Dam Liners</option>
             </select>
-          </div>
-          <div class="form-row">
-            <label for="gTags">Additional Tags (comma-separated)</label>
-            <input id="gTags" type="text" placeholder="kitchen, copper, installation" />
-            <small>Optional. Helps users filter and find related work.</small>
-          </div>
-          <div class="form-row">
-            <label for="gUrl">Image URL</label>
-            <div style="display:flex;gap:8px;align-items:center">
-              <input id="gUrl" type="url" placeholder="https://res.cloudinary.com/.../image.jpg" style="flex:1" />
-              <button type="button" class="btn small" id="copyGUrlBtn" aria-label="Copy Image URL">Copy</button>
             </div>
-            <small>Paste a direct image link or use Cloudinary Quick Upload below to auto-fill.</small>
+            <div class="form-row">
+              <label for="gTags">Additional Tags (comma-separated)</label>
+              <input id="gTags" type="text" placeholder="kitchen, copper, installation" />
+              <small>Optional. Helps users filter and find related work.</small>
+            </div>
           </div>
+          <!-- Capture-first workflow -->
+          <div class="card-block capture-block">
+            <div class="capture-header">
+              <div class="ch-left">
+                <h3 style="margin:0">Capture Photo <span class="badge-reco">Recommended</span></h3>
+                <p class="inline-help" style="margin:4px 0 0">Use your device camera to take a photo. Confirm to add it to the queue, then fill details once ready.</p>
+              </div>
+              <div class="ch-right">
+                <span id="queueCount" class="queue-count" aria-live="polite">0</span>
+              </div>
+            </div>
+            <div class="capture-actions">
+              <button type="button" class="btn btn-primary" id="openCameraBtn">📷 Take Photo</button>
+              <button type="button" class="btn btn-outline small" id="pickFileBtn">Choose from files</button>
+              <input id="cameraInput" type="file" accept="image/*" capture="environment" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
+            </div>
+            <div class="capture-preview">
+              <img id="cameraPreview" alt="Preview" style="display:none" />
+              <small id="cameraStatus" class="muted"></small>
+              <div class="capture-cta" style="display:none" id="captureCtas">
+                <button type="button" class="btn btn-primary small" id="confirmCaptureBtn">Use this photo</button>
+                <button type="button" class="btn btn-outline small" id="retakeBtn">Retake</button>
+              </div>
+            </div>
+            <div class="queue">
+              <div class="inline-help" style="margin-top:8px">Queued photos (will upload on submit):</div>
+              <div id="photoQueue" class="queue-grid"></div>
+            </div>
+          </div>
+
+          <!-- Hidden Image URL field: kept for auto-fill logic, not shown to admins -->
+          <input id="gUrl" type="hidden" />
           <div class="form-row">
             <label>Cloudinary Quick Upload (Optional)</label>
-            <button type="button" class="btn btn-outline" id="openCloudModalBtn">Get a LINK</button>
-            <small>Use the uploader modal to drag & drop or pick an image from your device.</small>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <button type="button" class="btn btn-outline small" id="openCloudModalBtn">Get a LINK</button>
+            </div>
+            <small>Alternative: open the uploader modal to drag & drop or paste an image link.</small>
           </div>
           <div class="toolbar">
             <button class="btn btn-primary" type="submit">Upload</button>
@@ -114,15 +167,15 @@
         </form>
       </section>
 
-      <section id="orders" class="card-block admin-card">
+      <section id="orders" class="card-block admin-card tab-section">
         <div class="admin-section-title">
           <h2>Orders</h2>
           <p class="inline-help">View recent orders sent from the site.</p>
         </div>
-        <div id="adminOrders" class="table"></div>
+        <div id="adminOrders" class="table orders-table"></div>
       </section>
 
-      <section id="reviews" class="card-block admin-card">
+      <section id="reviews" class="card-block admin-card tab-section">
         <div class="admin-section-title">
           <h2>Reviews</h2>
           <p class="inline-help">Manage submitted reviews. Delete if inappropriate.</p>
@@ -130,13 +183,15 @@
         <div id="adminReviews" class="table"></div>
       </section>
       
-      <section id="manageGallery" class="card-block admin-card span-2">
+      <section id="manageGallery" class="card-block admin-card span-2 tab-section">
         <div class="admin-section-title">
           <h2>Manage Gallery</h2>
           <p class="inline-help">Edit details or delete photos from Firestore.</p>
         </div>
         <div id="adminGallery" class="table"></div>
       </section>
+          </div>
+        </div>
       </div>
     </div>
   </main>

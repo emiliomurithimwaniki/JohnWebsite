@@ -8,38 +8,91 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <main class="section">
+  <main class="auth-wrap">
     <div class="container narrow">
-      <h1>Admin Login</h1>
-      <form id="loginForm" class="form" novalidate>
-        <div class="form-row">
-          <label for="email">Email</label>
-          <input id="email" type="email" required />
+      <div class="auth-card">
+        <div class="center" style="margin-bottom:8px">
+          <img src="assets/images/logo.svg" alt="John Plumber" style="width:56px;height:56px;margin:0 auto 6px;display:block" />
+          <h1 style="margin:0">Admin Login</h1>
+          <p class="muted" style="margin:4px 0 0">Access your dashboard to manage gallery, orders and reviews.</p>
         </div>
-        <div class="form-row">
-          <label for="password">Password</label>
-          <input id="password" type="password" required minlength="6" />
-        </div>
-        <button class="btn btn-primary" type="submit">Login</button>
-        <p class="form-msg" id="loginMsg" role="status"></p>
-      </form>
+        <form id="loginForm" class="form" novalidate>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input id="email" type="email" autocomplete="username" required />
+          </div>
+          <div class="form-row">
+            <label for="password">Password</label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="password" type="password" autocomplete="current-password" required minlength="6" style="flex:1" />
+              <button id="togglePw" type="button" class="btn btn-outline small" aria-pressed="false" aria-label="Show password">Show</button>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <button id="loginBtn" class="btn btn-primary" type="submit">Login</button>
+            <button id="forgotBtn" type="button" class="btn btn-light small">Forgot password?</button>
+          </div>
+          <p class="form-msg" id="loginMsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
     </div>
   </main>
   <script src="assets/js/firebase.js"></script>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
+    (function(){
+      const form = document.getElementById('loginForm');
+      const emailEl = document.getElementById('email');
+      const pwEl = document.getElementById('password');
       const msg = document.getElementById('loginMsg');
-      msg.textContent = 'Signing in...';
-      try {
-        await window.fb.authSignIn(email, password);
-        location.href = 'admin.html';
-      } catch (err) {
-        msg.textContent = err.message || 'Login failed';
+      const btn = document.getElementById('loginBtn');
+      const toggle = document.getElementById('togglePw');
+      const forgot = document.getElementById('forgotBtn');
+
+      // Toggle password visibility
+      if (toggle){
+        toggle.addEventListener('click', ()=>{
+          const showing = pwEl.getAttribute('type') === 'text';
+          pwEl.setAttribute('type', showing ? 'password' : 'text');
+          toggle.textContent = showing ? 'Show' : 'Hide';
+          toggle.setAttribute('aria-pressed', String(!showing));
+        });
       }
-    });
+
+      // Forgot password via Firebase Auth
+      if (forgot){
+        forgot.addEventListener('click', async ()=>{
+          try{
+            const email = (emailEl.value || '').trim();
+            if (!email){ msg.textContent = 'Enter your email first to receive a reset link.'; return; }
+            msg.textContent = 'Sending reset email...';
+            await firebase.auth().sendPasswordResetEmail(email);
+            msg.textContent = 'Password reset email sent. Check your inbox.';
+          }catch(err){
+            msg.textContent = err?.message || 'Failed to send reset email';
+          }
+        });
+      }
+
+      // Handle login
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = emailEl.value.trim();
+        const password = pwEl.value;
+        if (!email || !password){ msg.textContent = 'Enter email and password.'; return; }
+        msg.textContent = 'Signing in...';
+        btn.disabled = true; btn.textContent = 'Signing in...';
+        try {
+          // Ensure persistent session
+          try{ await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL); }catch{}
+          await window.fb.authSignIn(email, password);
+          location.href = 'admin.html';
+        } catch (err) {
+          msg.textContent = err && err.message ? err.message : 'Login failed';
+        } finally {
+          btn.disabled = false; btn.textContent = 'Login';
+        }
+      });
+    })();
   </script>
 </body>
 </html>

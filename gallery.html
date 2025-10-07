@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project Gallery | John Plumber</title>
   <meta name="description" content="Browse our completed plumbing projects: installations, repairs, and renovations." />
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://johnplumber.co.ke/gallery.html" />
+  <meta property="og:title" content="Project Gallery | John Plumber" />
+  <meta property="og:description" content="Browse our completed plumbing projects: installations, repairs, and renovations." />
+  <meta property="og:image" content="https://johnplumber.co.ke/assets/images/hero-plumber.svg" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Project Gallery | John Plumber" />
+  <meta name="twitter:description" content="Browse our completed plumbing projects: installations, repairs, and renovations." />
+  <meta name="twitter:image" content="https://johnplumber.co.ke/assets/images/hero-plumber.svg" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body class="theme-teal">
@@ -26,9 +38,15 @@
     <div class="container reveal">
       <h1>Project Gallery</h1>
       <p>Real work from our team. Updated regularly.</p>
-      <div id="galleryFilters" class="filter-bar reveal d1" aria-label="Gallery categories">
-        <button class="pill active" data-cat="">View All</button>
-        <!-- dynamic category pills will be inserted here by JS -->
+
+      <div class="gallery-toolbar reveal d1" role="region" aria-label="Gallery controls">
+        <div id="galleryFilters" class="filter-bar" aria-label="Gallery categories">
+          <button class="pill active" data-cat="">View All</button>
+          <!-- dynamic category pills will be inserted here by JS -->
+        </div>
+        <div class="filter-actions">
+          <input id="gallerySearch" class="chip-search" type="search" placeholder="Search photos..." aria-label="Search gallery" />
+        </div>
       </div>
       <div id="galleryGrid" class="gallery-grid reveal d2" aria-live="polite"></div>
       <!-- Lightbox -->
